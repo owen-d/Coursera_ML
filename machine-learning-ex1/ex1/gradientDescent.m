@@ -19,10 +19,13 @@ for iter = 1:num_iters
     %
     coeff = (alpha / m);
     h = (X * theta - y);
-    thetaOneTemp = theta(1) - coeff * sum(h);
-    thetaTwoTep = theta(2) - coeff * sum(h .* X(:,2));
-    theta(1) = thetaOneTemp;
-    theta(2) = thetaTwoTep;
+    % X = n x 2 matrix
+    % theta = 2 dimensional vector
+    % h = n dimensional vector.
+    % since X = (n x 2), X' = (2 x n), with the per-training example x-values being on each column
+    % This allows us to multiple X' by h: a (2xn) matrix and a n dimensional vector. 
+    % Multiplying them yields the x-value multiplied by the corresponding h(x)-y value. Then, everything is summed and divided by m. 
+    theta = theta - coeff * X' * h;
 
 
     % ============================================================
